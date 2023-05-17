@@ -17,7 +17,7 @@ class Test {
   }
 
   hello() {
-    console.log('hello'); // console log に hello と出力
+    console.log(Scratch); // console log に hello と出力
   }
 }
 
