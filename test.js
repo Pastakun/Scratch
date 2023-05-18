@@ -7,25 +7,17 @@ class Test {
       id: 'test',
       name: 'Test',
       blocks: [
-          {
-            opcode: "letters_of",
-            blockType: Scratch.BlockType.REPORTER,
-            text: "letters [LETTER1] to [LETTER2] of [STRING]",
-            arguments: {
-              LETTER1: {
-                type: Scratch.ArgumentType.NUMBER,
-                defaultValue: 2
-              },
-              LETTER2: {
-                type: Scratch.ArgumentType.NUMBER,
-                defaultValue: 4
-              },
-              STRING: {
-                type: Scratch.ArgumentType.STRING,
-                defaultValue: "apple"
-              }
-            }
-          }
+        {
+        	opcode: 'cloudvalue', 
+        	blockType: Scratch.BlockType.REPORTER,
+        	text: 'name [name] name',
+        	arguments: {
+        		name: {
+        			type: Scratch.ArgumentType.STRING,
+        			defaultValue: 'apple'
+        		}
+        	}
+        }
       ]
     }
   }
