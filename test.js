@@ -79,7 +79,9 @@ class Test {
 	
 	setcloud(args) {
 		cloud(args.projectid);
-		console.log(cloudvalue);
+		console.log(projectidlist);
+		console.log(cloudnamelist);
+		console.log(cloudvaluelist);
 	}
 	cloudvalue(args) {
 		cloud(args.projectid);
