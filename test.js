@@ -9,11 +9,11 @@ class Test {
       blocks: [
         {
           opcode: 'cloudvalue', 
-          blockType: BlockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: '[name]の値を取得',
           arguments: {
           	  value: {
-          	  	  type: ArgumentType.STRING,
+          	  	  type: Scratch.ArgumentType.STRING,
           	  	  defaultValue: '☁ 1',
           	  },
             }
