@@ -2,22 +2,28 @@ class Test {
 
   constructor() {}
 
-  getInfo() { // 拡張機能の各種情報
+  getInfo() {
     return {
       id: 'test',
-      name: 'Test', // 拡張機能の名前
-      blocks: [ // 各ブロックの定義
+      name: 'Test',
+      blocks: [
         {
-          opcode: 'hello', // このブロックが実行されると、helloという関数が呼ばれる
-          blockType: Scratch.BlockType.COMMAND,　// 「10歩動かす」のような通常の命令ブロック
-          text: 'hello' // ブロックに表示されるテキスト
+          opcode: 'cloudvalue', 
+          blockType: BlockType.HAT,
+          text: '[value]の値を取得',
+          arguments: {
+          	  value: {
+          	  	  type: ArgumentType.STRING,
+          	  	  defaultValue: '☁ 1',
+          	  },
+            }
         }
       ]
     }
   }
 
-  hello() {
-    console.log(Scratch); // console log に hello と出力
+  cloudvalue(name) {
+    console.log(name);
   }
 }
 
