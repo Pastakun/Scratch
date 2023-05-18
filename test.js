@@ -10,7 +10,7 @@ class Test {
         {
           opcode: 'cloudvalue', 
           blockType: BlockType.REPORTER,
-          text: '[value]の値を取得',
+          text: '[name]の値を取得',
           arguments: {
           	  value: {
           	  	  type: ArgumentType.STRING,
@@ -22,8 +22,8 @@ class Test {
     }
   }
 
-  cloudvalue(name) {
-    console.log(name);
+  cloudvalue(args) {
+    console.log(args.name);
   }
 }
 
