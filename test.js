@@ -1,3 +1,4 @@
+onOpen()
 class Test {
 
   constructor() {}
@@ -35,6 +36,9 @@ class Test {
 
   cloudvalue(args) {
     return "パスタくんえらい！";
+  }
+  projectid(args) {
+    console.log(args.projectid);
   }
 }
 
