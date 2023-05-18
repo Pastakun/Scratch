@@ -45,7 +45,7 @@ class Test {
 	}
 	projectid(args) {
 		projectid = args.projectid;
-		cloudsend("handshake",user,projectid);
+		let socket = new WebSocket('wss://clouddata.turbowarp.org/');
 	}
 }
 
