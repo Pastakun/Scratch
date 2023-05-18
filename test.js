@@ -11,7 +11,10 @@ function cloud(projectid) {
 			cloudsend("handshake","player",projectid);
 		});
 		socket.addEventListener('message', function (event) {
-			console.log(event.data.split("\n"));
+			const clouddata = event.data.split("\n"));
+			for (let i = 0; i < clouddata.length; i++){
+				console.log(clouddata[i]);
+			}
 		});
 	}
 }
