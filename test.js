@@ -1,4 +1,4 @@
-onOpen()
+console.log("test");
 class Test {
 
   constructor() {}
