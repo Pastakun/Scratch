@@ -44,8 +44,8 @@ class Test {
 		return "パスタくんえらい！";
 	}
 	projectid(args) {
-		projectid = args.projectid
-		socket = new WebSocket('wss://clouddata.turbowarp.org/');
+		projectid = args.projectid;
+		cloudsend("handshake",user,projectid);
 	}
 }
 
