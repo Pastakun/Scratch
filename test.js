@@ -17,7 +17,7 @@ function cloud(projectid) {
 			for (let i = 0; i < clouddatalist.length; i++){
 				const clouddata = JSON.parse(clouddatalist[i])
 				if (clouddata.method === "set") {
-					cloudvalue[projectidlist.indexOf(projectid)].clouddata.name = clouddata.value ;
+					cloudvalue.push({projectid: projectid, cloudname: clouddata.name, cloudvalue: clouddata.value}) ;
 				}
 			}
 		});
