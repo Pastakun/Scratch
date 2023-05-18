@@ -10,7 +10,7 @@ class Test {
         {
           opcode: 'cloudvalue', 
           blockType: Scratch.BlockType.REPORTER,
-          text: '[name]の値を取得',
+          text: '[name]name',
           arguments: {
           	  value: {
           	  	  type: Scratch.ArgumentType.STRING,
