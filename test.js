@@ -1,5 +1,5 @@
 const user = "player";
-let socket;
+let socket = new WebSocket('wss://clouddata.turbowarp.org/');
 let projectid = "";
 function cloudsend(method,user,project_id,name,value) {
 	socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
