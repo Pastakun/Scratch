@@ -10,7 +10,7 @@ class Test {
         {
         	opcode: 'cloudvalue', 
         	blockType: Scratch.BlockType.REPORTER,
-        	text: 'name [name] name',
+        	text: '☁ [name]',
         	arguments: {
         		name: {
         			type: Scratch.ArgumentType.STRING,
