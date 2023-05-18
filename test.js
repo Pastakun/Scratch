@@ -1,4 +1,6 @@
-const projectidlist = [];
+let projectidlist = [];
+let cloudvalue = {};
+
 function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
 		projectidlist.push(projectid);
@@ -15,9 +17,10 @@ function cloud(projectid) {
 			for (let i = 0; i < clouddatalist.length; i++){
 				const clouddata = JSON.parse(clouddatalist[i])
 				if (clouddata.method === "set") {
-					console.log(clouddata);
+					cloudvalue.projectid.clouddata.name = clouddata.value ;
 				}
 			}
+			console.log(cloudvalue);
 		});
 	}
 }
