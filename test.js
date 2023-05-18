@@ -1,9 +1,13 @@
 let projectidlist = [];
-let cloudvalue = [];
+let cloudnamelist = [];
+let cloudvaluelist = [];
 
 function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
 		projectidlist.push(projectid);
+		cloudnamelist.push([]);
+		cloudvaluelist.push([]);
+		const projectidlistnumber = projectidlist.indexOf(projectid);
 		const socket = new WebSocket('wss://clouddata.turbowarp.org/');
 		
 		function cloudsend(method,user,project_id,name,value) {
@@ -17,7 +21,12 @@ function cloud(projectid) {
 			for (let i = 0; i < clouddatalist.length; i++){
 				const clouddata = JSON.parse(clouddatalist[i])
 				if (clouddata.method === "set") {
-					cloudvalue.push({projectid: projectid, cloudname: clouddata.name, cloudvalue: clouddata.value}) ;
+					if (cloudnamelist[projectidlistnumber].indexOf(clouddata.name) === -1 ) {
+						cloudnamelist[projectidlistnumber].push(clouddata.name);
+						cloudvaluelist[projectidlistnumber].push("");
+					}
+					const cloudnamelistnumber = cloudnamelist[projectidlistnumber].indexOf(clouddata.name);
+					cloudvaluelist[projectidlistnumber][cloudnamelistnumber] = clouddata.value;
 				}
 			}
 		});
