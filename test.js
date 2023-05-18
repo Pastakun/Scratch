@@ -1,5 +1,4 @@
-const projectid = prompt('プロジェクトidを入力してください');
-
+console.log(connection);
 class Test {
 
   constructor() {}
@@ -16,7 +15,18 @@ class Test {
         	arguments: {
         		name: {
         			type: Scratch.ArgumentType.STRING,
-        			defaultValue: '1P'
+        			defaultValue: ''
+        		}
+        	}
+        }
+        {
+        	opcode: 'projectid', 
+        	blockType: Scratch.BlockType.COMMAND,
+        	text: 'プロジェクト[projectid]に接続する',
+        	arguments: {
+        		projectid: {
+        			type: Scratch.ArgumentType.NUMBER,
+        			defaultValue: ''
         		}
         	}
         }
