@@ -4,6 +4,7 @@ let cloudvaluelist = [];
 
 function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
+		let close = false;
 		projectidlist.push(projectid);
 		cloudnamelist.push([]);
 		cloudvaluelist.push([]);
@@ -30,6 +31,14 @@ function cloud(projectid) {
 				}
 			}
 		});
+		socket.addEventListener('close', function (event) {
+			close = true;
+			projectidlist.splice(projectidlistnumber, 1);
+			cloudnamelist.splice(projectidlistnumber, 1);
+			cloudvaluelist.splice(projectidlistnumber, 1);
+			cloud(projectid);
+		}); 
+		
 	}
 }
 class Test {
