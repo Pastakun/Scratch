@@ -24,7 +24,7 @@ class Test {
 			blocks: [
 				{
 					opcode: 'setcloud', 
-					blockType: Scratch.BlockType.REPORTER,
+					blockType: Scratch.BlockType.COMMAND,
 					text: 'プロジェクトid [projectid] の☁ [name] を [value] にする',
 					arguments: {
 						projectid: {
@@ -43,7 +43,7 @@ class Test {
 				},
 				{
 					opcode: 'cloudvalue', 
-					blockType: Scratch.BlockType.COMMAND,
+					blockType: Scratch.BlockType.REPORTER,
 					text: 'プロジェクトid [projectid] の☁ [name] ',
 					arguments: {
 						projectid: {
