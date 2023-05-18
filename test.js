@@ -23,18 +23,18 @@ class Test {
 			name: 'Test',
 			blocks: [
 				{
-					opcode: 'cloudvalue', 
+					opcode: 'setcloud', 
 					blockType: Scratch.BlockType.REPORTER,
 					text: 'プロジェクトid [projectid] の☁ [name] を [value] にする',
 					arguments: {
 						projectid: {
 							type: Scratch.ArgumentType.NUMBER,
 							defaultValue: ''
-						}
+						},
 						name: {
 							type: Scratch.ArgumentType.STRING,
 							defaultValue: ''
-						}
+						},
 						value: {
 							type: Scratch.ArgumentType.STRING,
 							defaultValue: ''
@@ -42,14 +42,14 @@ class Test {
 					}
 				},
 				{
-					opcode: 'projectid', 
+					opcode: 'cloudvalue', 
 					blockType: Scratch.BlockType.COMMAND,
 					text: 'プロジェクトid [projectid] の☁ [name] ',
 					arguments: {
 						projectid: {
 							type: Scratch.ArgumentType.NUMBER,
 							defaultValue: ''
-						}
+						},
 						name: {
 							type: Scratch.ArgumentType.STRING,
 							defaultValue: ''
@@ -60,11 +60,11 @@ class Test {
 		}
 	}
 	
-	cloudvalue(args) {
+	setcloud(args) {
 		cloud(args.projectid);
 		return "パスタくんえらい！";
 	}
-	projectid(args) {
+	cloudvalue(args) {
 		cloud(args.projectid);
 	}
 }
