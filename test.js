@@ -46,7 +46,7 @@ class Test {
 	projectid(args) {
 		projectid = args.projectid;
 		socket.close();
-		let socket = new WebSocket('wss://clouddata.turbowarp.org/');
+		socket = new WebSocket('wss://clouddata.turbowarp.org/');
 	}
 }
 
