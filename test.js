@@ -41,7 +41,7 @@ class Test {
 			socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
 		}
 		socket.addEventListener('open', function (event) {
-			cloudsend("set","player" ,args.projectid ,"☁ cloud", "100");
+			cloudsend("handshake","player",args.projectid);
 		});
 		socket.addEventListener('message', function (event) {
 			console.log(event.data.split("\n"));
