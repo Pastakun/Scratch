@@ -17,6 +17,7 @@ function cloud(projectid) {
 				if (clouddata.method === "set") {
 					console.log(clouddata);
 				}
+			}
 		});
 	}
 }
