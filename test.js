@@ -9,7 +9,7 @@ class Test {
       blocks: [
         {
           opcode: 'cloudvalue', 
-          blockType: BlockType.HAT,
+          blockType: BlockType.REPORTER,
           text: '[value]の値を取得',
           arguments: {
           	  value: {
