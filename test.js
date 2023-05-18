@@ -23,7 +23,7 @@ class Test {
   }
 
   cloudvalue(args) {
-    return args.STRING.substring("パスタくんえらい！");
+    return "パスタくんえらい！";
   }
 }
 
