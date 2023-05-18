@@ -18,7 +18,7 @@ class Test {
         			defaultValue: ''
         		}
         	}
-        }
+        },
         {
         	opcode: 'projectid', 
         	blockType: Scratch.BlockType.COMMAND,
