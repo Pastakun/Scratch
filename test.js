@@ -4,6 +4,9 @@ let projectid = "";
 function cloudsend(method,user,project_id,name,value) {
 	socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
 }
+socket.addEventListener('open', function (event) {
+	cloudsend("handshake",user,projectid);
+});
 class Test {
 //constructor() {}
 	getInfo() {
@@ -43,7 +46,6 @@ class Test {
 	projectid(args) {
 		projectid = args.projectid
 		socket = new WebSocket('wss://clouddata.turbowarp.org/');
-		cloudsend("handshake",user,projectid);
 	}
 }
 
