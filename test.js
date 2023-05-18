@@ -85,7 +85,7 @@ class Test {
 	}
 	cloudvalue(args) {
 		cloud(args.projectid);
-		return cloudvaluelist[projectidlist.indexOf(args.projectid)][cloudnamelist[projectidlistnumber].indexOf(args.name)];
+		return cloudvaluelist[projectidlist.indexOf(args.projectid)][cloudnamelist[projectidlist.indexOf(args.projectid)].indexOf(args.name)];
 	}
 }
 
