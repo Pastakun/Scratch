@@ -1,3 +1,5 @@
+const projectid = prompt('プロジェクトidを入力してください');
+
 class Test {
 
   constructor() {}
