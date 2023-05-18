@@ -1,4 +1,3 @@
-console.log(connection);
 class Test {
 
   constructor() {}
