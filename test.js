@@ -1,26 +1,3 @@
-const user = "player";
-let projectid = "";
-function connect() {
-	const socket = new WebSocket('wss://clouddata.turbowarp.org/');
-	//クラウド変数更新
-	function cloudsend(method,user,project_id,name,value) {
-		socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
-	}
-	
-	// 接続が開いたときのイベント
-	socket.addEventListener('open', function (event) {
-		cloudsend("set",user ,projectid ,"☁ cloud", "100");
-	});
-	
-	// メッセージの待ち受け
-	socket.addEventListener('message', function (event) {
-		console.log(event.data.split("\n"));
-	});
-	socket.addEventListener('close', function (event) {
-		console.log('The connection has been closed successfully.');
-		connect();
-	}); 
-
 class Test {
 //constructor() {}
 	getInfo() {
@@ -58,11 +35,18 @@ class Test {
 		return "パスタくんえらい！";
 	}
 	projectid(args) {
-		projectid = args.projectid;
-		socket.close();
+		const socket = new WebSocket('wss://clouddata.turbowarp.org/');
+		
+		function cloudsend(method,user,project_id,name,value) {
+			socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
+		}
+		socket.addEventListener('open', function (event) {
+			cloudsend("set","player" ,args.projectid ,"☁ cloud", "100");
+		});
+		socket.addEventListener('message', function (event) {
+			console.log(event.data.split("\n"));
+		});
 	}
 }
 
 Scratch.extensions.register(new Test());
-}
-connect();
