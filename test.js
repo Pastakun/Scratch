@@ -62,10 +62,10 @@ class Test {
 	
 	setcloud(args) {
 		cloud(args.projectid);
-		return "パスタくんえらい！";
 	}
 	cloudvalue(args) {
 		cloud(args.projectid);
+		return "パスタくんえらい！";
 	}
 }
 
