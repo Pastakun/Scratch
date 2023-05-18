@@ -1,12 +1,22 @@
 const user = "player";
-let socket = new WebSocket('wss://clouddata.turbowarp.org/');
 let projectid = "";
-function cloudsend(method,user,project_id,name,value) {
-	socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
+function connect() {
+	const socket = new WebSocket('wss://clouddata.turbowarp.org/');
+	//クラウド変数更新
+	function cloudsend(method,user,project_id,name,value) {
+		socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
+	}
+	
+	// 接続が開いたときのイベント
+	socket.addEventListener('open', function (event) {
+		cloudsend("handshake",user,projectid);
+	});
+	
+	// メッセージの待ち受け
+	socket.addEventListener('message', function (event) {
+		console.log(event.data.split("\n"));
+	});
 }
-socket.addEventListener('open', function (event) {
-	cloudsend("handshake",user,projectid);
-});
 class Test {
 //constructor() {}
 	getInfo() {
@@ -45,7 +55,7 @@ class Test {
 	}
 	projectid(args) {
 		projectid = args.projectid;
-		let socket = new WebSocket('wss://clouddata.turbowarp.org/');
+		connect();
 	}
 }
 
