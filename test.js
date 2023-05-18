@@ -14,7 +14,7 @@ class Test {
           arguments: {
           	  value: {
           	  	  type: Scratch.ArgumentType.STRING,
-          	  	  defaultValue: '1'
+          	  	  defaultValue: 'apple'
           	  },
             }
         }
