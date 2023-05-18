@@ -23,7 +23,7 @@ class Test {
   }
 
   cloudvalue(args) {
-    console.log(args.name);
+    return args.STRING.substring("パスタくんえらい！");
   }
 }
 
