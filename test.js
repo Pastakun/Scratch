@@ -1,5 +1,5 @@
 let projectidlist = [];
-let cloudvalue = {};
+let cloudvalue = [];
 
 function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
@@ -17,10 +17,9 @@ function cloud(projectid) {
 			for (let i = 0; i < clouddatalist.length; i++){
 				const clouddata = JSON.parse(clouddatalist[i])
 				if (clouddata.method === "set") {
-					cloudvalue.projectid.clouddata.name = clouddata.value ;
+					cloudvalue[projectidlist.indexOf(projectid)].clouddata.name = clouddata.value ;
 				}
 			}
-			console.log(cloudvalue);
 		});
 	}
 }
@@ -71,6 +70,7 @@ class Test {
 	
 	setcloud(args) {
 		cloud(args.projectid);
+		console.log(cloudvalue);
 	}
 	cloudvalue(args) {
 		cloud(args.projectid);
