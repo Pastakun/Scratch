@@ -1,4 +1,3 @@
-console.log("test");
 class Test {
 
   constructor() {}
@@ -38,7 +37,7 @@ class Test {
     return "パスタくんえらい！";
   }
   projectid(args) {
-    console.log(args.projectid);
+    console.log("test");
   }
 }
 
