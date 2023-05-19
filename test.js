@@ -18,16 +18,23 @@ function cloud(projectid) {
 		}
 		socket.addEventListener('open', function (event) {
 			cloudsend("handshake","player",projectid);
-			setInterval(() => {
-				if (cloudsetvaluelist[projectidlistnumber].length !== 0) {
-					const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvaluelist[projectidlistnumber].length)];
+			let socketopen = window.setInterval(cloudset, 100);
+			function cloudset() {
+				if (close) {
+					window.clearInterval(socketopen);
+				}else{
+					if (cloudsetvaluelist[projectidlistnumber].length !== 0) {
+						const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvaluelist[projectidlistnumber].length)];
+						cloudsend("set", "player", projectid, cloudsetvalue.name, cloudsetvalue.value);
+						cloudsetvaluelist[projectidlistnumber].splice(0);
+					}
 				}
-			}, 100);
+			}
 		});
 		socket.addEventListener('message', function (event) {
 			const clouddatalist = event.data.split("\n");
 			for (let i = 0; i < clouddatalist.length; i++){
-				const clouddata = JSON.parse(clouddatalist[i])
+				const clouddata = JSON.parse(clouddatalist[i]);
 				if (clouddata.method === "set") {
 					if (cloudnamelist[projectidlistnumber].indexOf(clouddata.name) === -1 ) {
 						cloudnamelist[projectidlistnumber].push(clouddata.name);
@@ -44,6 +51,7 @@ function cloud(projectid) {
 		    	projectidlist.splice(projectidlistnumber, 1);
 				cloudnamelist.splice(projectidlistnumber, 1);
 				cloudvaluelist.splice(projectidlistnumber, 1);
+				cloudsetvaluelist.splice(projectidlistnumber, 1);
 				cloud(projectid);
     		}, 3000);
 		}); 
