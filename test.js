@@ -94,12 +94,8 @@ class Test {
 				{
 					opcode: 'cloudvalue', 
 					blockType: Scratch.BlockType.REPORTER,
-					text: '[projectid] の☁ [name] ',
+					text: '☁ [name] ',
 					arguments: {
-						projectid: {
-							type: Scratch.ArgumentType.NUMBER,
-							defaultValue: ''
-						},
 						name: {
 							type: Scratch.ArgumentType.STRING,
 							defaultValue: ''
