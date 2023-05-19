@@ -100,7 +100,7 @@ class Test {
 	}
 	
 	setcloud(args) {
-		if (projectidlist.indexOf(projectid) === -1) {
+		if (projectidlist.indexOf(args.projectid) === -1) {
 		cloud(args.projectid);
 		}
 		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
