@@ -103,9 +103,9 @@ class Test {
 	setcloud(args) {
 		cloud(args.projectid);
 		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
-		console.log(projectidlist);
-		console.log(cloudnamelist);
-		console.log(cloudvaluelist);
+		//console.log(projectidlist);
+		//console.log(cloudnamelist);
+		//console.log(cloudvaluelist);
 	}
 	cloudvalue(args) {
 		cloud(args.projectid);
