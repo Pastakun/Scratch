@@ -3,7 +3,7 @@ let cloudnamelist = [];
 let cloudvaluelist = [];
 let cloudsetvaluelist = [];
 
-const cloud = (projectid) => {
+function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
 		let close = false;
 		projectidlist.push(projectid);
@@ -54,7 +54,7 @@ const cloud = (projectid) => {
 		}); 
 		
 	}
-};
+}
 class Test {
 //constructor() {}
 	getInfo() {
@@ -112,7 +112,9 @@ class Test {
 	}
 	
 	projectid(args) {
-		return cloud(args.projectid);
+		return new Promise((resolve, reject) => {
+			cloud(args.projectid);
+		});
 	}
 	setcloud(args) {
 		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
