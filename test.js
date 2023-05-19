@@ -1,6 +1,7 @@
 new Promise((resolve, reject) => {
 	setInterval(() => {
 		console.log("Interval type1");
+		resolve();
 	}, 100);
 });
 let connectionprojectid = "";
