@@ -116,6 +116,7 @@ class Test {
 			//cloud(args.projectid);
 			let socketopen = window.setInterval(cloudset, 100);
 			function cloudset() {
+				resolve();
 				console.log("test");
 			}
 		});
