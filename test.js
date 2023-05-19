@@ -1,6 +1,7 @@
 let projectidlist = [];
 let cloudnamelist = [];
 let cloudvaluelist = [];
+let cloudsetvaluelist = [];
 
 function cloud(projectid) {
 	if (projectidlist.indexOf(projectid) === -1) {
@@ -8,6 +9,7 @@ function cloud(projectid) {
 		projectidlist.push(projectid);
 		cloudnamelist.push([]);
 		cloudvaluelist.push([]);
+		cloudsetvaluelist.push([]);
 		const projectidlistnumber = projectidlist.indexOf(projectid);
 		const socket = new WebSocket('wss://clouddata.turbowarp.org/');
 		
@@ -16,6 +18,11 @@ function cloud(projectid) {
 		}
 		socket.addEventListener('open', function (event) {
 			cloudsend("handshake","player",projectid);
+			setInterval(() => {
+				if (cloudsetvaluelist[projectidlistnumber].length !== 0) {
+					const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvalue[projectidlistnumber].length)];
+				}
+			}, 100);
 		});
 		socket.addEventListener('message', function (event) {
 			const clouddatalist = event.data.split("\n");
@@ -90,6 +97,7 @@ class Test {
 	
 	setcloud(args) {
 		cloud(args.projectid);
+		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
 		console.log(projectidlist);
 		console.log(cloudnamelist);
 		console.log(cloudvaluelist);
