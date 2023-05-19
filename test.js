@@ -79,12 +79,8 @@ class Test {
 				{
 					opcode: 'setcloud', 
 					blockType: Scratch.BlockType.COMMAND,
-					text: 'プロジェクトid [projectid] の☁ [name] を [value] にする',
+					text: '☁ [name] を [value] にする',
 					arguments: {
-						projectid: {
-							type: Scratch.ArgumentType.NUMBER,
-							defaultValue: ''
-						},
 						name: {
 							type: Scratch.ArgumentType.STRING,
 							defaultValue: ''
@@ -119,9 +115,6 @@ class Test {
 	}
 	setcloud(args) {
 		cloudsetvaluelist.push({name: "☁ " + args.name, value: args.value});
-		//console.log(projectidlist);
-		//console.log(cloudnamelist);
-		//console.log(cloudvaluelist);
 	}
 	cloudvalue(args) {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
