@@ -18,7 +18,7 @@ function cloud(projectid) {
 		}
 		socket.addEventListener('open', function (event) {
 			cloudsend("handshake","player",projectid);
-			let socketopen = window.setInterval(cloudset, 2000);
+			let socketopen = window.setInterval(cloudset, 150);
 			function cloudset() {
 				if (close) {
 					window.clearInterval(socketopen);
