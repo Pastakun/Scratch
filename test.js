@@ -20,7 +20,7 @@ function cloud(projectid) {
 			cloudsend("handshake","player",projectid);
 			setInterval(() => {
 				if (cloudsetvaluelist[projectidlistnumber].length !== 0) {
-					const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvalue[projectidlistnumber].length)];
+					const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvaluelist[projectidlistnumber].length)];
 				}
 			}, 100);
 		});
