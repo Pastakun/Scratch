@@ -33,10 +33,13 @@ function cloud(projectid) {
 		});
 		socket.addEventListener('close', function (event) {
 			close = true;
-			projectidlist.splice(projectidlistnumber, 1);
-			cloudnamelist.splice(projectidlistnumber, 1);
-			cloudvaluelist.splice(projectidlistnumber, 1);
-			cloud(projectid);
+		    setTimeout(() => {
+		    	projectidlist.splice(projectidlistnumber, 1);
+				cloudnamelist.splice(projectidlistnumber, 1);
+				cloudvaluelist.splice(projectidlistnumber, 1);
+				cloud(projectid);
+     			connect();
+    		}, 3000);
 		}); 
 		
 	}
