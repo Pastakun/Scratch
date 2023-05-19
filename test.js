@@ -38,7 +38,6 @@ function cloud(projectid) {
 				cloudnamelist.splice(projectidlistnumber, 1);
 				cloudvaluelist.splice(projectidlistnumber, 1);
 				cloud(projectid);
-     			connect();
     		}, 3000);
 		}); 
 		
