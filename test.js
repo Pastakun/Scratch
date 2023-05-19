@@ -20,7 +20,15 @@ function cloud(projectid) {
 			cloudsend("handshake","player",projectid);
 			let socketopen = window.setInterval(cloudset, 100);
 			function cloudset() {
-				console.log("test");
+				if (close) {
+					window.clearInterval(socketopen);
+				}else{
+					if (cloudsetvaluelist[projectidlistnumber].length !== 0) {
+						const cloudsetvalue = cloudsetvaluelist[projectidlistnumber][Math.floor(Math.random()*cloudsetvaluelist[projectidlistnumber].length)];
+						cloudsend("set", "player", projectid, cloudsetvalue.name, cloudsetvalue.value);
+						cloudsetvaluelist[projectidlistnumber].splice(0);
+					}
+				}
 			}
 		});
 		socket.addEventListener('message', function (event) {
@@ -55,6 +63,17 @@ class Test {
 			name: 'Test',
 			blocks: [
 				{
+					opcode: 'projectid', 
+					blockType: Scratch.BlockType.COMMAND,
+					text: 'プロジェクトid [projectid]',
+					arguments: {
+						projectid: {
+							type: Scratch.ArgumentType.NUMBER,
+							defaultValue: ''
+						}
+					}
+				},
+				{
 					opcode: 'setcloud', 
 					blockType: Scratch.BlockType.COMMAND,
 					text: 'プロジェクトid [projectid] の☁ [name] を [value] にする',
@@ -76,7 +95,7 @@ class Test {
 				{
 					opcode: 'cloudvalue', 
 					blockType: Scratch.BlockType.REPORTER,
-					text: 'プロジェクトid [projectid] の☁ [name] ',
+					text: '[projectid] の☁ [name] ',
 					arguments: {
 						projectid: {
 							type: Scratch.ArgumentType.NUMBER,
@@ -92,15 +111,16 @@ class Test {
 		}
 	}
 	
+	projectid(args) {
+		return cloud(args.projectid);
+	}
 	setcloud(args) {
-		cloud(args.projectid);
 		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
 		//console.log(projectidlist);
 		//console.log(cloudnamelist);
 		//console.log(cloudvaluelist);
 	}
 	cloudvalue(args) {
-		cloud(args.projectid);
 		return cloudvaluelist[projectidlist.indexOf(args.projectid)][cloudnamelist[projectidlist.indexOf(args.projectid)].indexOf("☁ " + args.name)];
 	}
 }
