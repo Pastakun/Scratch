@@ -1,3 +1,6 @@
+  setInterval(() => {
+    console.log("Interval type1");
+  }, 500);
 let connectionprojectid = "";
 let newprojectid = "";
 let cloudnamelist = [];
@@ -52,7 +55,6 @@ function cloud(projectid) {
 
 let socketopen = window.setInterval(cloudset, 0);
 function cloudset() {
-	console.log("test");
 	if (connectionprojectid !== newprojectid) {
 		cloud(newprojectid);
 		connectionprojectid = newprojectid
