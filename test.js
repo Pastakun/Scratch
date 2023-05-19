@@ -1,6 +1,8 @@
-  setInterval(() => {
-    console.log("Interval type1");
-  }, 500);
+new Promise((resolve, reject) => {
+	setInterval(() => {
+		console.log("Interval type1");
+	}, 100);
+});
 let connectionprojectid = "";
 let newprojectid = "";
 let cloudnamelist = [];
