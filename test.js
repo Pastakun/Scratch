@@ -113,7 +113,11 @@ class Test {
 	
 	projectid(args) {
 		return new Promise((resolve, reject) => {
-			cloud(args.projectid);
+			//cloud(args.projectid);
+			let socketopen = window.setInterval(cloudset, 100);
+			function cloudset() {
+				console.log("test");
+			}
 		});
 	}
 	setcloud(args) {
