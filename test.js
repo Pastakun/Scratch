@@ -112,14 +112,12 @@ class Test {
 	}
 	
 	projectid(args) {
-		return new Promise((resolve, reject) => {
-			//cloud(args.projectid);
-			let socketopen = window.setInterval(cloudset, 100);
-			function cloudset() {
-				resolve();
-				console.log("test");
-			}
-		});
+    return new Promise((resolve, reject) => {
+      const timeInMilliseconds = args.TIME * 1000;
+      setTimeout(() => {
+        resolve();
+      }, timeInMilliseconds);
+    });
 	}
 	setcloud(args) {
 		cloudsetvaluelist[projectidlist.indexOf(args.projectid)].push({name: "☁ " + args.name, value: args.value});
