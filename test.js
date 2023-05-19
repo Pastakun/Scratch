@@ -3,7 +3,7 @@ let cloudnamelist = [];
 let cloudvaluelist = [];
 let cloudsetvaluelist = [];
 
-function cloud(projectid) {
+const cloud = (projectid) => {
 	if (projectidlist.indexOf(projectid) === -1) {
 		let close = false;
 		projectidlist.push(projectid);
@@ -54,7 +54,7 @@ function cloud(projectid) {
 		}); 
 		
 	}
-}
+};
 class Test {
 //constructor() {}
 	getInfo() {
