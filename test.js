@@ -44,11 +44,10 @@ function cloud(projectid) {
 	});
 	socket.addEventListener('close', function (event) {
 		close = true;
-			setTimeout(() => {
-				cloud(projectid);
-			}, 3000);
-		}); 
-	}
+		setTimeout(() => {
+			cloud(projectid);
+		}, 3000);
+	}); 
 }
 
 let socketopen = window.setInterval(cloudset, 0);
