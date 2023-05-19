@@ -52,6 +52,7 @@ function cloud(projectid) {
 
 let socketopen = window.setInterval(cloudset, 0);
 function cloudset() {
+	console.log("test");
 	if (connectionprojectid !== newprojectid) {
 		cloud(newprojectid);
 		connectionprojectid = newprojectid
