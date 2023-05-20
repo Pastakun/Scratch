@@ -1,6 +1,10 @@
 (function(Scratch) {
 	'use strict';
 	
+	if (!Scratch.extensions.unsandboxed) {
+		throw new Error('This Hello World example must run unsandboxed');
+	}
+
 	let sendcloud = true;
 	let cloudnamelist = [];
 	let cloudvaluelist = [];
