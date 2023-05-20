@@ -17,15 +17,19 @@ function cloud() {
 		cloudsend(listnumber, "handshake","player",connectionprojectid);
 	});
 	socketlist[listnumber].addEventListener('message', function (event) {
-		const clouddatalist = event.data.split("\n");
-		for (let i = 0; i < clouddatalist.length; i++){
-			const clouddata = JSON.parse(clouddatalist[i]);
-			if (clouddata.method === "set") {
-				if (cloudnamelist.indexOf(clouddata.name) === -1 ) {
-					cloudnamelist.push(clouddata.name);
-					cloudvaluelist.push("");
+		if (listnumber === socketlist.length - 1) {
+			WebSocket.close();
+		}else{
+			const clouddatalist = event.data.split("\n");
+			for (let i = 0; i < clouddatalist.length; i++){
+				const clouddata = JSON.parse(clouddatalist[i]);
+				if (clouddata.method === "set") {
+					if (cloudnamelist.indexOf(clouddata.name) === -1 ) {
+						cloudnamelist.push(clouddata.name);
+						cloudvaluelist.push("");
+					}
+					cloudvaluelist[cloudnamelist.indexOf(clouddata.name)] = clouddata.value;
 				}
-				cloudvaluelist[cloudnamelist.indexOf(clouddata.name)] = clouddata.value;
 			}
 		}
 	});
