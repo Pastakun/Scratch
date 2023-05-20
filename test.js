@@ -1,4 +1,4 @@
-let sendcloud = false;
+let sendcloud = true;
 let cloudnamelist = [];
 let cloudvaluelist = [];
 let socketlist = [];
