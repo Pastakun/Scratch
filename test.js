@@ -93,8 +93,8 @@ class Test {
 		if (performance.now() - sendtime > 100) {
 			sendtime = performance.now();
 			cloudsend(socketlist.length - 1, "set","player",connectionprojectid, "☁ " + args.name, args.value);
-			cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)] = args.value;
 		}
+		cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)] = args.value;
 	}
 	cloudvalueblock(args) {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
