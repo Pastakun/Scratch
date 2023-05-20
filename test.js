@@ -89,6 +89,7 @@ class Test {
 		cloud();
 	}
 	setcloudblock(args) {
+		return new Promise((resolve, reject) => {
 		if (sendcloud) {
 			sendcloud = false;
 			cloudsend(socketlist.length - 1, "set","player",connectionprojectid, "☁ " + args.name, args.value);
@@ -97,6 +98,7 @@ class Test {
 				sendcloud = true;
 			}
 		}
+		});
 	}
 	cloudvalueblock(args) {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
