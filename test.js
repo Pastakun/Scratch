@@ -17,8 +17,8 @@ function cloud() {
 		cloudsend(listnumber, "handshake","player",connectionprojectid);
 	});
 	socketlist[listnumber].addEventListener('message', function (event) {
-		if (listnumber === socketlist.length - 1) {
-			WebSocket.close();
+		if (listnumber !== socketlist.length - 1) {
+			socketlist[listnumber].close();
 		}else{
 			const clouddatalist = event.data.split("\n");
 			for (let i = 0; i < clouddatalist.length; i++){
