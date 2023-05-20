@@ -3,6 +3,7 @@ let cloudnamelist = [];
 let cloudvaluelist = [];
 let socketlist = [];
 let connectionprojectid = "";
+let sendtime = performance.now();
 
 function cloudsend(listnumber,method,user,project_id,name,value) {
 	socketlist[listnumber].send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
@@ -89,17 +90,11 @@ class Test {
 		cloud();
 	}
 	setcloudblock(args) {
-		return new Promise((resolve, reject) => {
-		if (sendcloud) {
-			sendcloud = false;
+		if (performance.now() - sendtime > 1000) {
+			sendtime = performance.now();
 			cloudsend(socketlist.length - 1, "set","player",connectionprojectid, "☁ " + args.name, args.value);
 			window.setTimeout(sendtrue, 100);
-			function sendtrue() {
-				sendcloud = true;
-				resolve();
-			}
 		}
-		});
 	}
 	cloudvalueblock(args) {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
