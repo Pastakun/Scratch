@@ -90,7 +90,7 @@ class Test {
 		cloud();
 	}
 	setcloudblock(args) {
-		if (performance.now() - sendtime > 1000) {
+		if (performance.now() - sendtime > 100) {
 			sendtime = performance.now();
 			cloudsend(socketlist.length - 1, "set","player",connectionprojectid, "☁ " + args.name, args.value);
 			window.setTimeout(sendtrue, 100);
