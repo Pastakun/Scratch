@@ -1,68 +1,39 @@
-new Promise((resolve, reject) => {
-	setInterval(() => {
-		console.log("Interval type1");
-		resolve();
-	}, 100);
-});
-let connectionprojectid = "";
-let newprojectid = "";
+let sendcloud = false;
+let projectid = "";
 let cloudnamelist = [];
 let cloudvaluelist = [];
-let cloudsetvaluelist = [];
+let socketlist = [];
 
-function cloud(projectid) {
-	let close = false;
-	cloudnamelist.push([]);
-	cloudvaluelist.push([]);
-	cloudsetvaluelist.push([]);
-	const socket = new WebSocket('wss://clouddata.turbowarp.org/');
-	
-	function cloudsend(method,user,project_id,name,value) {
-		socket.send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
-	}
-	socket.addEventListener('open', function (event) {
-		cloudsend("handshake","player",projectid);
-		let socketopen = window.setInterval(cloudset, 100);
-		function cloudset() {
-			if (close) {
-				window.clearInterval(socketopen);
-			}else{
-				if (cloudsetvaluelist.length !== 0) {
-					const cloudsetvalue = cloudsetvaluelist[Math.floor(Math.random()*cloudsetvaluelist.length)];
-					cloudsend("set", "player", projectid, cloudsetvalue.name, cloudsetvalue.value);
-					cloudsetvaluelist = [];
-				}
-			}
-		}
-	});
-	socket.addEventListener('message', function (event) {
-		const clouddatalist = event.data.split("\n");
-		for (let i = 0; i < clouddatalist.length; i++){
-			const clouddata = JSON.parse(clouddatalist[i]);
-			if (clouddata.method === "set") {
-				if (cloudnamelist.indexOf(clouddata.name) === -1 ) {
-					cloudnamelist.push(clouddata.name);
-					cloudvaluelist.push("");
-				}
-				cloudvaluelist[cloudnamelist.indexOf(clouddata.name)] = clouddata.value;
-			}
-		}
-	});
-	socket.addEventListener('close', function (event) {
-		close = true;
-		setTimeout(() => {
-			cloud(projectid);
-		}, 3000);
-	}); 
-}
+cloudnamelist.push([]);
+cloudvaluelist.push([]);
+projectid = "";
+socketlist.push(new WebSocket('wss://clouddata.turbowarp.org/'));
 
-let socketopen = window.setInterval(cloudset, 0);
-function cloudset() {
-	if (connectionprojectid !== newprojectid) {
-		cloud(newprojectid);
-		connectionprojectid = newprojectid
-	}
+function cloudsend(method,user,project_id,name,value) {
+	socketlist[socketlist.length - 1].send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
 }
+socketlist[socketlist.length - 1].addEventListener('open', function (event) {
+	cloudsend("handshake","player",projectid);
+	sendcloud = true;
+});
+socketlist[socketlist.length - 1].addEventListener('message', function (event) {
+	const clouddatalist = event.data.split("\n");
+	for (let i = 0; i < clouddatalist.length; i++){
+		const clouddata = JSON.parse(clouddatalist[i]);
+		if (clouddata.method === "set") {
+			if (cloudnamelist.indexOf(clouddata.name) === -1 ) {
+				cloudnamelist.push(clouddata.name);
+				cloudvaluelist.push("");
+			}
+			cloudvaluelist[cloudnamelist.indexOf(clouddata.name)] = clouddata.value;
+		}
+	}
+});
+socketlist[socketlist.length - 1].addEventListener('close', function (event) {
+	setTimeout(() => {
+		socketlist.push(new WebSocket('wss://clouddata.turbowarp.org/'));
+	}, 3000);
+}); 
 
 class Test {
 //constructor() {}
@@ -72,7 +43,7 @@ class Test {
 			name: 'Test',
 			blocks: [
 				{
-					opcode: 'projectid', 
+					opcode: 'projectidblock', 
 					blockType: Scratch.BlockType.COMMAND,
 					text: 'プロジェクトid [projectid]',
 					arguments: {
@@ -83,7 +54,7 @@ class Test {
 					}
 				},
 				{
-					opcode: 'setcloud', 
+					opcode: 'setcloudblock', 
 					blockType: Scratch.BlockType.COMMAND,
 					text: '☁ [name] を [value] にする',
 					arguments: {
@@ -98,7 +69,7 @@ class Test {
 					}
 				},
 				{
-					opcode: 'cloudvalue', 
+					opcode: 'cloudvalueblock', 
 					blockType: Scratch.BlockType.REPORTER,
 					text: '☁ [name] ',
 					arguments: {
@@ -112,13 +83,21 @@ class Test {
 		}
 	}
 	
-	projectid(args) {
-		newprojectid = args.projectid
+	projectidblock(args) {
+		projectid = args.projectid;
+		socketlist.push(new WebSocket('wss://clouddata.turbowarp.org/'));
 	}
-	setcloud(args) {
-		cloudsetvaluelist.push({name: "☁ " + args.name, value: args.value});
+	setcloudblock(args) {
+		if (sendcloud) {
+			sendcloud = false;
+			cloudsend("set","player",projectid, "☁ " + args.name, args.value);
+			window.setTimeout(sendtrue, 100);
+			function sendtrue() {
+				sendcloud = true;
+			}
+		}
 	}
-	cloudvalue(args) {
+	cloudvalueblock(args) {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
 	}
 }
