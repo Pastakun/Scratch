@@ -96,6 +96,7 @@ class Test {
 			window.setTimeout(sendtrue, 100);
 			function sendtrue() {
 				sendcloud = true;
+				resolve();
 			}
 		}
 		});
