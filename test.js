@@ -2,17 +2,18 @@ let sendcloud = true;
 let cloudnamelist = [];
 let cloudvaluelist = [];
 let socketlist = [];
+let connectionprojectid = "";
 
 function cloudsend(listnumber,method,user,project_id,name,value) {
 	socketlist[listnumber].send("".concat(JSON.stringify({"method":method,"user":user,"project_id":project_id,"name":name,"value":value}),"\n"));
 }
-function cloud(projectid) {
+function cloud() {
 	const listnumber = socketlist.length;
 	socketlist.push(new WebSocket('wss://clouddata.turbowarp.org/'));
 	cloudnamelist = [];
 	cloudvaluelist = [];
 	socketlist[listnumber].addEventListener('open', function (event) {
-		cloudsend(listnumber, "handshake","player",projectid);
+		cloudsend(listnumber, "handshake","player",connectionprojectid);
 	});
 	socketlist[listnumber].addEventListener('message', function (event) {
 		const clouddatalist = event.data.split("\n");
@@ -30,7 +31,7 @@ function cloud(projectid) {
 	socketlist[listnumber].addEventListener('close', function (event) {
 		if (listnumber === socketlist.length - 1) {
 			setTimeout(() => {
-				cloud(projectid);
+				cloud();
 			}, 3000);
 		}
 	}); 
@@ -84,12 +85,13 @@ class Test {
 	}
 	
 	projectidblock(args) {
-		cloud(args.projectid)
+		connectionprojectid = args.projectid;
+		cloud();
 	}
 	setcloudblock(args) {
 		if (sendcloud) {
 			sendcloud = false;
-			cloudsend(socketlist.length - 1, "set","player",projectid, "☁ " + args.name, args.value);
+			cloudsend(socketlist.length - 1, "set","player",connectionprojectid, "☁ " + args.name, args.value);
 			window.setTimeout(sendtrue, 100);
 			function sendtrue() {
 				sendcloud = true;
