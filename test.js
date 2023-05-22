@@ -42,11 +42,11 @@ function cloud() {
 		}
 	}); 
 }
-class Test {
+class Cloud {
 	getInfo() {
 		return {
-			id: 'test',
-			name: 'Test',
+			id: 'cloud',
+			name: '☁',
 			blocks: [
 				{
 					opcode: 'projectidblock', 
@@ -106,4 +106,4 @@ class Test {
 		return cloudvaluelist[cloudnamelist.indexOf("☁ " + args.name)];
 	}
 }
-Scratch.extensions.register(new Test());
+Scratch.extensions.register(new Cloud());
