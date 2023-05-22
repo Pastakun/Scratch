@@ -90,8 +90,10 @@ class Test {
 	}
 	
 	projectidblock(args) {
-		connectionprojectid = args.projectid;
-		cloud();
+		if (connectionprojectid !== args.projectid) {
+			connectionprojectid = args.projectid;
+			cloud();
+		}
 	}
 	setcloudblock(args) {
 		if (performance.now() - sendtime > 50) {
